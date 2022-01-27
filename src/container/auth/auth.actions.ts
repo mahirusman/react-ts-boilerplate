@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authService } from '../../services/auth.service';
-import { logindataTypes } from '../../types/auth';
+import { Iuser, logindataTypes } from '../../types/auth';
+import httpClient from '../../utils/httpClient';
 
 enum actiontype {
   Login_USER = 'login user action type',
@@ -9,7 +9,7 @@ enum actiontype {
 export const userloginAction = createAsyncThunk(
   actiontype.Login_USER,
   async (payload: logindataTypes) => {
-    const res = await authService.login(payload);
+    const res = await httpClient.post<Iuser>('/user/sign-in', payload);
     return res;
   }
 );

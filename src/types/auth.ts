@@ -10,7 +10,7 @@ export enum userRoles {
 }
 
 export interface IAuthstate {
-  user: Iuser;
+  user: Iuser | null;
 }
 
 export interface Iuser {

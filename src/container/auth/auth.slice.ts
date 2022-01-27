@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthstate } from '../../types/auth';
+import { createReducerBuilder } from '../../utils/actions';
+import { userloginAction } from './auth.actions';
 
 const initialState: IAuthstate = {
   user: {
@@ -11,6 +13,17 @@ const initialState: IAuthstate = {
     token: '',
   },
 };
+
+const reducerBuilder = createReducerBuilder<IAuthstate>();
+
+const loginReducer = reducerBuilder(userloginAction, {
+  fulfilled: (state, { payload }) => {
+    if (payload) {
+      console.log('payload ', payload);
+    }
+  },
+});
+
 const authslice = createSlice({
   name: 'authslice',
   initialState,
@@ -19,7 +32,9 @@ const authslice = createSlice({
     logout: (state, action) => {},
   },
 
-  extraReducers: {},
+  extraReducers: (builder) => {
+    loginReducer(builder);
+  },
 });
 
 // export const {} = authslice.actions;
