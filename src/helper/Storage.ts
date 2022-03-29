@@ -1,6 +1,6 @@
-import { StorageStore } from "@/types";
+import { JWTTokens, StorageStore } from "@/types";
 
-const AsyncStorage = window.localStorage;
+const localStorage = window.localStorage;
 
 export const Keys: { [key: string]: keyof StorageStore } = {
   AUTH_TOKEN: "authTokens",
@@ -8,30 +8,20 @@ export const Keys: { [key: string]: keyof StorageStore } = {
 
 const EMPTY_VALUE = "null";
 
-// Wrapper class for Async Storage
-// API: https://github.com/react-native-community/async-storage/blob/master/docs/API.md
 class StorageService {
-  get(key: keyof StorageStore): Promise<any> {
-    return new Promise((resolve) => {
-      AsyncStorage.getItem(key).then(
-        (res: string | null) => {
-          const value = this.fromJSON(res);
-          resolve(value);
-        },
-        (err) => {
-          const e = JSON.parse(JSON.stringify(err));
-          if (e.code !== "404") {
-            console.warn("[Storage] Get", key, err);
-          }
-          resolve(null);
-        }
-      );
-    });
+  get(key: keyof StorageStore): any {
+    // @ts-ignore: Object is possibly 'null'.
+    const res: string | null = localStorage.getItem(key);
+    if (res) {
+      return this.fromJSON(res);
+    } else {
+      console.warn("[Storage] Get", key, "not found");
+    }
   }
 
-  set(key: keyof StorageStore, value: any): Promise<any> {
+  set(key: keyof StorageStore, value: any): void {
     const storeValue = this.toJSON(value);
-    return AsyncStorage.setItem(key, storeValue);
+    return localStorage.setItem(key, storeValue);
   }
 
   toJSON = (value: any) => {
@@ -68,48 +58,22 @@ class StorageService {
     return val;
   };
 
-  getAllKeys(): Promise<any> {
-    return new Promise((resolve) => {
-      AsyncStorage.multiGet(Object.values(Keys)).then(
-        (result: Array<[string, string | null]>) => {
-          const obj = {};
-          // @ts-ignore
-          result.forEach(([key, value]: [string, string]) => {
-            // @ts-ignore
-            obj[key] = this.fromJSON(value);
-          });
-          resolve(obj);
-        }
-      );
-    });
-  }
-
-  getItem(key: keyof StorageStore): Promise<any> {
+  getItem(key: keyof StorageStore): any {
     return this.get(key);
   }
 
-  setItem(key: keyof StorageStore, value: any): Promise<any> {
+  setItem(key: keyof StorageStore, value: any): void {
     return this.set(key, value);
   }
 
-  clearAllKeys(): Promise<any> {
-    return new Promise((resolve) => {
-      AsyncStorage.multiRemove([Keys.DEBUG_AUTH_TOKEN, Keys.AUTH_TOKEN]).then(
-        () => resolve()
-      );
-    });
+  clearAllKeys(): void {
+    localStorage.clear();
   }
 
   setAuthTokens = (authTokens: JWTTokens | null) =>
     this.set(Keys.AUTH_TOKEN, authTokens);
 
-  getAuthTokens = (): Promise<JWTTokens | null> => this.get(Keys.AUTH_TOKEN);
-
-  setDebugAuthTokens = (authToken: JWTTokens | null) =>
-    this.set(Keys.DEBUG_AUTH_TOKEN, authToken);
-
-  getDebugAuthTokens = (): Promise<JWTTokens | null> =>
-    this.get(Keys.DEBUG_AUTH_TOKEN);
+  getAuthTokens = (): JWTTokens | null => this.get(Keys.AUTH_TOKEN);
 }
 
 export default new StorageService();
