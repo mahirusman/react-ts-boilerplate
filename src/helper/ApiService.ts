@@ -1,8 +1,8 @@
+import { JWTTokens } from "@/types";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 import { config } from "../config/constants";
 import { modelMapper, ModelResponseTypes } from "../models";
-import { Colors } from "../theme";
 import StorageService from "./Storage";
 
 const REFRESH_TOKEN = "/refresh/";
@@ -58,7 +58,7 @@ class ApiService {
         // eslint-disable-next-line no-console
         console.groupCollapsed(
           `%c API Request => ${method.toUpperCase()} ${configuration.url}`,
-          `color: ${Colors.grey}`
+          `color:white`
         );
         console.log("timestamp", new Date(Date.now()).toString());
         console.log("configuration", configuration);
@@ -76,7 +76,7 @@ class ApiService {
             `%c API Response => ${method.toUpperCase()} ${
               response?.config.url
             }`,
-            `color: ${Colors.success}`
+            `color: green`
           );
           console.log("timestamp", new Date(Date.now()).toString());
           console.log("duration", `${Date.now() - start}ms`);
@@ -102,7 +102,7 @@ class ApiService {
             `%c API Refreshing => ${method.toUpperCase()} ${
               error.response?.config.url || ""
             }`,
-            `color: ${Colors.lightGrey}`
+            `color: green`
           );
           try {
             this.refreshing = true;
