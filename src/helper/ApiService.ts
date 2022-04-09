@@ -2,7 +2,7 @@ import { JWTTokens } from "@/types";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 import { config } from "../config/constants";
-import { modelMapper, ModelResponseTypes } from "../models";
+import { modelMapper } from "../models";
 import StorageService from "./Storage";
 
 const REFRESH_TOKEN = "/refresh/";
@@ -10,7 +10,6 @@ const REFRESH_TOKEN = "/refresh/";
 type APIRequestArgs = {
   url: string;
   payload?: any;
-  responseType?: keyof typeof ModelResponseTypes;
 };
 
 class ApiService {
@@ -83,12 +82,7 @@ class ApiService {
           console.log("response", response);
           console.groupEnd();
         }
-        // @ts-ignore
-        const { apiResponseType } = response.config;
-        if (apiResponseType) {
-          // @ts-ignore
-          response.data = modelMapper(response.data, apiResponseType);
-        }
+
         return response;
       },
       async (error: AxiosError) => {
@@ -150,27 +144,30 @@ class ApiService {
   };
 
   setAuthHeader = (access: string) => {
-    this.axios.defaults.headers.Authorization = `Bearer ${access}`;
+    // this.axios.defaults.headers.Authorization = `Bearer ${access}`;
+  };
+
+  clearAuthInfo = (wrappedAPI: ApiService): ApiService => {
+    this.setupInstance();
+    return wrappedAPI;
   };
 
   get = ({
     url,
     payload,
-    responseType,
   }: // @ts-ignore
   APIRequestArgs) =>
     this.axios.get<any, any>(url, {
-      apiResponseType: responseType,
       params: payload,
     });
 
   // @ts-ignore
-  post = ({ url, payload, responseType }: APIRequestArgs) =>
-    this.axios.post<any, any>(url, payload, { apiResponseType: responseType });
+  post = ({ url, payload }: APIRequestArgs) =>
+    this.axios.post<any, any>(url, payload);
 
   // @ts-ignore
-  delete = ({ url, payload, responseType }: APIRequestArgs) =>
-    this.axios.delete(url, payload, { apiResponseType: responseType });
+  delete = ({ url, payload }: APIRequestArgs) =>
+    this.axios.delete(url, payload);
 }
 
 export default new ApiService();

@@ -1,20 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IAuthstate } from "../../types/auth";
-import { createReducerBuilder } from "../../utils/actions";
+import { createReducerBuilder } from "@/utils/actions";
 import { userloginAction } from "./auth.actions";
+import User from "@/models/user";
+import { UserstoreState } from "@/types";
 
-const initialState: IAuthstate = {
-  user: {
-    role: "",
-    _id: "",
-    name: "",
-    email: "",
-    avator: "",
-    token: "",
-  },
+const initialState: UserstoreState = {
+  user: new User(),
 };
 
-const reducerBuilder = createReducerBuilder<IAuthstate>();
+const reducerBuilder = createReducerBuilder<UserstoreState>();
 
 export const logout = createAsyncThunk("logoutaction", (state, actionType) => {
   // make any api call for server if need to logout from user

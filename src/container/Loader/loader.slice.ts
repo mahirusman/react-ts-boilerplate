@@ -1,11 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Iloader } from '../../types/loader';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: Iloader = {
   loader: false,
 };
 const loaderSlice = createSlice({
-  name: 'loaderSlice',
+  name: "loaderSlice",
   initialState,
   reducers: {
     setloader: (state, action) => {
