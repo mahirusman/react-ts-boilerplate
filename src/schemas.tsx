@@ -1,10 +1,5 @@
-import { every, get, some } from "lodash";
 import * as yup from "yup";
-
-import { ChecklistInputItem, NutritionItem, StretchingValue } from "@/types";
-
-import { Regex } from "../constants";
-import Strings from "../localization";
+import enStrings from "./localization/en";
 
 export const Fields = {
   email: "email",
@@ -22,110 +17,48 @@ export const Fields = {
 
 export const requiredEmailSchema = yup
   .string()
-  .email(Strings.auth.errors.invalidEmail)
-  .required(Strings.auth.errors.emptyEmail);
+  .email("invalid")
+  .required("required");
 
-export const requiredLoginPasswordSchema = yup
-  .string()
-  .required(Strings.auth.errors.emptyPassword);
+export const requiredLoginPasswordSchema = yup.string().required("required");
 
 export const requiredPasswordSchema = yup
   .string()
-  .min(8, Strings.auth.errors.min(8))
-  .max(50, Strings.auth.errors.max(50))
-  .matches(Regex.oneNumber, Strings.auth.passwordValidErr.oneNumber)
-  .matches(Regex.oneSpecialChar, Strings.auth.passwordValidErr.oneSpecialChar)
-  .required(Strings.auth.passwordValidErr.empty);
+  .min(8, enStrings.auth.errors.min(8))
+  .max(50, enStrings.auth.errors.max(50))
+  .required(enStrings.auth.passwordValidErr.empty);
 
 export const requiredPassword2Schema = yup
   .string()
-  .oneOf([yup.ref(Fields.password)], Strings.auth.errors.passwordsDoesNotMatch)
-  .required(Strings.auth.errors.passwordsDoesNotMatch);
+  .oneOf(
+    [yup.ref(Fields.password)],
+    enStrings.auth.errors.passwordsDoesNotMatch
+  )
+  .required(enStrings.auth.errors.passwordsDoesNotMatch);
 
 export const requiredCheckboxSchema = yup.boolean().oneOf([true]).required();
 
 export const requiredFirstNameSchema = yup
   .string()
-  .max(16, Strings.auth.errors.max(16))
-  .required(Strings.auth.errors.emptyFirstName);
+  .max(16, enStrings.auth.errors.max(16))
+  .required(enStrings.auth.errors.emptyFirstName);
 
 export const requiredLastNameSchema = yup
   .string()
-  .max(16, Strings.auth.errors.max(16))
-  .required(Strings.auth.errors.emptyLastName);
+  .max(16, enStrings.auth.errors.max(16))
+  .required(enStrings.auth.errors.emptyLastName);
 
 export const requiredPhoneNumberSchema = yup
   .string()
-  .required(Strings.auth.errors.emptyPhoneNumber);
+  .required(enStrings.auth.errors.emptyPhoneNumber);
 
 export const requiredBirthdaySchema = yup
   .string()
-  .required(Strings.auth.errors.emptyBirthday);
+  .required(enStrings.auth.errors.emptyBirthday);
 
 export const requiredVerificationCodeSchema = yup
   .number()
-  .required(Strings.auth.errors.invalidVerificationCode);
-
-export const optionalMultilineSchema = yup.string();
-
-export const optionalImageUploaderSchema = yup.string();
-
-export const requiredMultilineSchema = optionalMultilineSchema.required(
-  Strings.habit.errors.pleaseAnswer
-);
-
-export const requiredImageUploaderSchema = optionalImageUploaderSchema.required(
-  Strings.habit.errors.pleaseUploader
-);
-
-export const optionalSingleConfirmationSchema = yup.boolean();
-
-export const requiredSingleConfirmationSchema = optionalSingleConfirmationSchema
-  .oneOf([true], Strings.habit.errors.pleaseCheck)
-  .required(Strings.habit.errors.pleaseCheck);
-
-export const optionalChecklistInputSchema = yup.array();
-
-export const requiredChecklistInputSchema = optionalChecklistInputSchema
-  .min(1, Strings.habit.errors.pleaseEnterAtLeastOne)
-  .test("", Strings.habit.errors.pleaseEnterAtLeastOne, (value) =>
-    some(value, (vl: ChecklistInputItem) => !!vl.value)
-  );
-
-export const requiredNutritionInputSchema = optionalChecklistInputSchema
-  .min(1, Strings.habit.errors.pleaseEnterAtLeastOne)
-  .test("", Strings.habit.errors.pleaseEnter, (value) =>
-    every(value, (vl: NutritionItem) => !!vl.value)
-  );
-
-export const requiredStretchingInputSchema = yup
-  .object<StretchingValue>()
-  .test(
-    "",
-    Strings.habit.errors.pleaseEnter,
-    (value) => !!value?.level || get(value, "skip", false)
-  );
-
-export const requiredChecklistSchema = yup.array();
-
-export const requiredMultipleChoiceSchema = (min: number) => {
-  const schema = yup.array();
-
-  if (min > 0) {
-    schema
-      .required(Strings.habit.errors.pleaseOneOrMore)
-      .min(min, Strings.habit.errors.minMultipleChoice(min));
-  }
-
-  return schema;
-};
-
-export const problemSchema = yup
-  .array()
-  .required(Strings.habit.errors.pleaseOneOrMore)
-  .min(1, Strings.habit.errors.minMultipleChoice(1));
-
-export const requiredRadioGroup = yup.string().required();
+  .required(enStrings.auth.errors.invalidVerificationCode);
 
 export const LoginSchema = yup.object().shape({
   [Fields.email]: requiredEmailSchema,

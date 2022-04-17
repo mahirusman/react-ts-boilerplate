@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import eye from "../../assets/images/icons/eye.png";
 import open from "../../assets/images/icons/open.png";
 
 import { Formik, Field } from "formik";
 
 const Login: React.FC = (props) => {
+  const handleFormSubmit = () => {};
   return (
     <section className="signuppage loginpage bgwhite">
       <div className="row align-items-center justify-content-center">
         <div className="col-lg-7 col-md-12 m-auto">
           <div className="outlineform rightside">
             <h2 className="mb-25 text-blue">Sign In</h2>
-            <p className="mb-45">
-              Don't have an account? <Link to="/customer/signup">Sign Up</Link>
-            </p>
+
             <Formik
-              onSubmit={onSubmit}
-              initialValues={initalValues}
+              onSubmit={handleFormSubmit}
+              initialValues={{
+                email: "",
+                password: "",
+              }}
               enableReinitialize={true}
             >
               {(formik) => {
@@ -42,7 +43,7 @@ const Login: React.FC = (props) => {
                         <div className="icon-wrapper">
                           <Field
                             name="password"
-                            type={password ? "password" : "textfield"}
+                            type="textfield"
                             className="form-control input mb-0"
                             placeholder="Enter your password"
                           />
@@ -50,8 +51,7 @@ const Login: React.FC = (props) => {
                           <img
                             width="20"
                             className="img-fluid eye-icon pointer"
-                            src={password ? eye : open}
-                            onClick={() => setPassword(!password)}
+                            src={open}
                             alt="logo"
                           />
                         </div>
