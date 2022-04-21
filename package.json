@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.24.0",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -27,7 +28,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f .env.test.local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
