@@ -22,4 +22,3 @@ ReactDOM.render(
 
 export { axios as ApiClient };
 // exporting axios to use it in base service
-// applying single source of truth

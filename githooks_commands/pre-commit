@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Protect pre-defined branches from accidental commits, and enforce standards on the branch name.
+echo -e "===\n>> Pre-commit Hook:: Checking protected branches and current branch name..."
+
+PROTECTED_BRANCHES="^(master)$"
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ "$BRANCH_NAME" =~ $PROTECTED_BRANCHES ]]
+then
+  echo -e "\n🚫 Committing directly to a protected branch is not allowed! Please create your own branch and commit your work to it, or commit directly to another unprotected branch.\n" && exit 1
+fi
+
+if [[ $BRANCH_NAME = *[![:ascii:]]* ]]
+then
+  echo -e "\n🚫 Branch name should not have non-ASCII characters, please rename your branch.\n" && exit 1
+fi
+
+if [[ $BRANCH_NAME =~ [A-Z] ]]
+then
+  echo -e "\n🚫 Branch name should not have upper case characters, please rename your branch.\n" && exit 1
+fi
+
+echo -e ">> Finished checking branch name.\n==="
+
+exit 0
