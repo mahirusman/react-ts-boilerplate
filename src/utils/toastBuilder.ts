@@ -1,19 +1,19 @@
-import React from 'react';
-import { toast } from 'react-toastify';
+import React from "react";
+import { toast } from "react-toastify";
 
-type tosstypes = 'success' | 'info' | 'warn' | 'error';
+type tosstypes = "success" | "info" | "warn" | "error";
 
 const toastBuilder = (type: tosstypes, message: string): React.ReactText => {
   switch (type) {
-    case 'success':
+    case "success":
       return toast.success(message);
-    case 'info':
+    case "info":
       return toast.info(message);
 
-    case 'warn':
+    case "warn":
       return toast.warn(message);
 
-    case 'error':
+    case "error":
       return toast.error(message);
 
     default:

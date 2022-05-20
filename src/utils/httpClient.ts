@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { config } from '../config/constants';
+import axios from "axios";
+import { config } from "../config/constants";
 
 const httpClient = axios.create({
   baseURL: config.SERVER_URL,
@@ -8,8 +8,6 @@ const httpClient = axios.create({
 // Add this as an interceptor so that it calls currentSession for each ajax
 // request which will refresh out id token automatically in the background in
 // case it expires.
-httpClient.interceptors.request.use(async (config) => {
-  return config;
-});
+httpClient.interceptors.request.use(async (config) => config);
 
 export default httpClient;

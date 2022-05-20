@@ -18,8 +18,7 @@ const enStrings = {
       invalidVerificationCode: "Verification code cannot be empty.",
       signInCanceled: "User cancelled the login flow",
       inProgress: "Operation (e.g. sign in) is in progress already",
-      playStoreNotAvailable:
-        "Play services not available at this moment, try again later.",
+      playStoreNotAvailable: "Play services not available at this moment, try again later.",
     },
     instruction: {
       title: "Instructions sent!",
@@ -36,15 +35,13 @@ const enStrings = {
     },
     forgotPassword: {
       title: "Forgot Password",
-      description:
-        "Please enter your email below to receive your password reset instructions.",
+      description: "Please enter your email below to receive your password reset instructions.",
       haveAccount: "Have an account?",
       login: "Login.",
     },
     resetPassword: {
       title: "Recovery Password",
-      description:
-        "Reset code was sent to your email. Please enter your new password.",
+      description: "Reset code was sent to your email. Please enter your new password.",
       password: "Password",
       confirmPassword: "Confirm Password",
       buttonTitle: "Reset Password",
@@ -57,8 +54,7 @@ const enStrings = {
       buttonTitle: "Verify Phone Number",
     },
     verifyCode: {
-      description:
-        "Please enter the verification code we sent to your phone number.",
+      description: "Please enter the verification code we sent to your phone number.",
       code: "Enter verification code",
       buttonTitle: "Submit",
       resendButton: "Resend Code",
@@ -93,8 +89,7 @@ const enStrings = {
       lastName: "Last Name",
       phone: "Phone Number",
       photoLibraryPermissionBlockedTitle: "Permission Denied",
-      photoLibraryPermissionBlockedMessage:
-        "Please grant a permission in Settings in order to continue.",
+      photoLibraryPermissionBlockedMessage: "Please grant a permission in Settings in order to continue.",
     },
     strengthPassword: {
       veryWeak: "Very Weak",

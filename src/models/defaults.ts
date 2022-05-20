@@ -15,12 +15,9 @@ export const makeDate = (date: string | Date, extra = 0): Date => {
   return newDate;
 };
 
-export const defaultString = (value: string | null | undefined): string =>
-  value ? value.toString() : "";
+export const defaultString = (value: string | null | undefined): string => (value ? value.toString() : "");
 
-export const defaultNumber = (
-  value: string | number | null | undefined
-): number => {
+export const defaultNumber = (value: string | number | null | undefined): number => {
   if (value !== null && value !== undefined) {
     const num = parseInt(value.toString(), 10);
     if (_.isFinite(num)) {
@@ -40,12 +37,9 @@ export const defaultFloat = (value: string | number | null | undefined) => {
   return 0;
 };
 
-export const defaultBoolean = (value: boolean | null | undefined): boolean =>
-  !!value;
+export const defaultBoolean = (value: boolean | null | undefined): boolean => !!value;
 
-export const defaultArray = (
-  value: Array<unknown> | null | undefined
-): Array<any> => {
+export const defaultArray = (value: Array<unknown> | null | undefined): Array<any> => {
   let list: Array<any> = [];
   if (Array.isArray(value)) {
     list = value;
@@ -55,15 +49,8 @@ export const defaultArray = (
   return list;
 };
 
-export function defaultEnum<EnumType, EnumObject>(
-  value: EnumType,
-  enumObj: EnumObject
-): EnumType | "" {
-  return Object.values(enumObj).indexOf(value) > -1 &&
-    value !== null &&
-    value !== undefined
-    ? value
-    : "";
+export function defaultEnum<EnumType, EnumObject>(value: EnumType, enumObj: EnumObject): EnumType | "" {
+  return Object.values(enumObj).indexOf(value) > -1 && value !== null && value !== undefined ? value : "";
 }
 
 export const defaultObject = (value: any): Record<string, unknown> | any => {

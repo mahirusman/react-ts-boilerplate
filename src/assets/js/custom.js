@@ -34,10 +34,7 @@ $(".listingslider").owlCarousel({
   dots: false,
   margin: 50,
   nav: true,
-  navText: [
-    "<img src='./assets/images/leftangle.png'>",
-    "<img src='./assets/images/rightangle.png'>",
-  ],
+  navText: ["<img src='./assets/images/leftangle.png'>", "<img src='./assets/images/rightangle.png'>"],
   responsive: {
     0: {
       items: 1,
@@ -62,9 +59,7 @@ function uploads(clicked_id) {
 
 realFileBtn.addEventListener("change", function () {
   if (realFileBtn.value) {
-    customTxt.innerHTML = realFileBtn.value.match(
-      /[\/\\]([\w\d\s\.\-\(\)]+)$/
-    )[1];
+    customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
   } else {
     customTxt.innerHTML = "No file chosen, yet.";
   }

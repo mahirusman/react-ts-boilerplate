@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import open from "../../assets/images/icons/open.png";
-
 import { Formik, Field } from "formik";
+import open from "../../assets/images/icons/open.png";
 
 const Login: React.FC = (props) => {
   const handleFormSubmit = () => {};
@@ -34,9 +33,7 @@ const Login: React.FC = (props) => {
                           className="form-control input mb-0"
                           placeholder="Enter your valid email"
                         />
-                        {errors.email && touched.email && (
-                          <span className="text-danger">{errors.email}</span>
-                        )}
+                        {errors.email && touched.email && <span className="text-danger">{errors.email}</span>}
                       </div>
                       <div className="col-md-12 mb-2">
                         <label htmlFor="password">Password</label>
@@ -48,12 +45,7 @@ const Login: React.FC = (props) => {
                             placeholder="Enter your password"
                           />
 
-                          <img
-                            width="20"
-                            className="img-fluid eye-icon pointer"
-                            src={open}
-                            alt="logo"
-                          />
+                          <img width="20" className="img-fluid eye-icon pointer" src={open} alt="logo" />
                         </div>
                         {errors.password && touched.password && (
                           <span className="text-danger">{errors.password}</span>
@@ -65,11 +57,7 @@ const Login: React.FC = (props) => {
                         </p>
                       </div>
                     </div>
-                    <button
-                      type="submit"
-                      className="btn-primary"
-                      disabled={isSubmitting}
-                    >
+                    <button type="submit" className="btn-primary" disabled={isSubmitting}>
                       Click Here to Generate Error
                     </button>
                   </form>

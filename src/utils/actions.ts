@@ -1,4 +1,4 @@
-import { ActionReducerMapBuilder, CaseReducer, Action } from '@reduxjs/toolkit';
+import { ActionReducerMapBuilder, CaseReducer, Action } from "@reduxjs/toolkit";
 
 interface TypedActionCreator<Type = any> {
   (...args: any[]): Action<Type>;
@@ -12,31 +12,29 @@ interface ThunkActionCreator {
 }
 
 interface TAsyncReducer<TState, TAction extends ThunkActionCreator> {
-  fulfilled?: CaseReducer<TState, ReturnType<TAction['fulfilled']>>;
-  pending?: CaseReducer<TState, ReturnType<TAction['pending']>>;
-  rejected?: CaseReducer<TState, ReturnType<TAction['rejected']>>;
+  fulfilled?: CaseReducer<TState, ReturnType<TAction["fulfilled"]>>;
+  pending?: CaseReducer<TState, ReturnType<TAction["pending"]>>;
+  rejected?: CaseReducer<TState, ReturnType<TAction["rejected"]>>;
 }
 
-function isThunkActionCreator(
-  action: TypedActionCreator | ThunkActionCreator
-): action is ThunkActionCreator {
+function isThunkActionCreator(action: TypedActionCreator | ThunkActionCreator): action is ThunkActionCreator {
   return (
-    action.hasOwnProperty('pending') ||
-    action.hasOwnProperty('fulfilled') ||
-    action.hasOwnProperty('rejected')
+    action.hasOwnProperty("pending") ||
+    action.hasOwnProperty("fulfilled") ||
+    action.hasOwnProperty("rejected")
   );
 }
 
 export function createReducerBuilder<TState>() {
   return <TAction extends TypedActionCreator | ThunkActionCreator>(
-    action: TAction,
-    reducer: TAction extends ThunkActionCreator
-      ? TAsyncReducer<TState, TAction>
-      : TAction extends TypedActionCreator
-      ? CaseReducer<TState, ReturnType<TAction>>
-      : never
-  ) => {
-    return (builder: ActionReducerMapBuilder<TState>) => {
+      action: TAction,
+      reducer: TAction extends ThunkActionCreator
+        ? TAsyncReducer<TState, TAction>
+        : TAction extends TypedActionCreator
+        ? CaseReducer<TState, ReturnType<TAction>>
+        : never
+    ) =>
+    (builder: ActionReducerMapBuilder<TState>) => {
       if (isThunkActionCreator(action)) {
         const a = action as ThunkActionCreator;
         const r = reducer as TAsyncReducer<TState, typeof a>;
@@ -58,5 +56,4 @@ export function createReducerBuilder<TState>() {
         builder.addCase(a, r);
       }
     };
-  };
 }

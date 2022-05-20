@@ -1,12 +1,6 @@
-import React from 'react';
-import {
-  withRouter,
-  Route,
-  Switch,
-  useLocation,
-  Redirect,
-} from 'react-router-dom';
-import Login from '../components/LogIn';
+import React from "react";
+import { withRouter, Route, Switch, useLocation, Redirect } from "react-router-dom";
+import Login from "../components/LogIn";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -18,7 +12,7 @@ const App: React.FC = () => {
 
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: "/login",
             state: { from: location },
           }}
         />

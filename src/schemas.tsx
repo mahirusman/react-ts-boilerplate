@@ -15,10 +15,7 @@ export const Fields = {
   problems: "problems",
 };
 
-export const requiredEmailSchema = yup
-  .string()
-  .email("invalid")
-  .required("required");
+export const requiredEmailSchema = yup.string().email("invalid").required("required");
 
 export const requiredLoginPasswordSchema = yup.string().required("required");
 
@@ -30,10 +27,7 @@ export const requiredPasswordSchema = yup
 
 export const requiredPassword2Schema = yup
   .string()
-  .oneOf(
-    [yup.ref(Fields.password)],
-    enStrings.auth.errors.passwordsDoesNotMatch
-  )
+  .oneOf([yup.ref(Fields.password)], enStrings.auth.errors.passwordsDoesNotMatch)
   .required(enStrings.auth.errors.passwordsDoesNotMatch);
 
 export const requiredCheckboxSchema = yup.boolean().oneOf([true]).required();
@@ -48,13 +42,9 @@ export const requiredLastNameSchema = yup
   .max(16, enStrings.auth.errors.max(16))
   .required(enStrings.auth.errors.emptyLastName);
 
-export const requiredPhoneNumberSchema = yup
-  .string()
-  .required(enStrings.auth.errors.emptyPhoneNumber);
+export const requiredPhoneNumberSchema = yup.string().required(enStrings.auth.errors.emptyPhoneNumber);
 
-export const requiredBirthdaySchema = yup
-  .string()
-  .required(enStrings.auth.errors.emptyBirthday);
+export const requiredBirthdaySchema = yup.string().required(enStrings.auth.errors.emptyBirthday);
 
 export const requiredVerificationCodeSchema = yup
   .number()

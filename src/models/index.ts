@@ -26,8 +26,7 @@ export function modelMapper(
     const { data, meta } = object;
     if (isArray(data)) {
       // @ts-ignore
-      const hydrated =
-        data.length > 0 ? data.map((item) => new ModelClass(item)) : [];
+      const hydrated = data.length > 0 ? data.map((item) => new ModelClass(item)) : [];
       return {
         data: hydrated,
         meta: meta || null,

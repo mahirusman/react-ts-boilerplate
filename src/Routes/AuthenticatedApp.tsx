@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import {
-  useRouteMatch,
-  withRouter,
-  Route,
-  Switch,
-  useLocation,
-  Redirect,
-} from 'react-router-dom';
-import WelcomePage from '../components/Welcome';
+import React, { useEffect, useState } from "react";
+import { useRouteMatch, withRouter, Route, Switch, useLocation, Redirect } from "react-router-dom";
+import WelcomePage from "../components/Welcome";
 
 const App: React.FC = () => {
-  const match = useRouteMatch('*');
+  const match = useRouteMatch("*");
   const location = useLocation();
   const user = false || true;
-  const [baseRoute, ...otherRoutes] =
-    match && match.url ? match.url.substr(1).split('/') : [];
+  const [baseRoute, ...otherRoutes] = match && match.url ? match.url.substr(1).split("/") : [];
 
-  let from = { pathname: '/today' };
-  let inviteId: string | null = null;
+  const from = { pathname: "/today" };
+  const inviteId: string | null = null;
 
-  const isInviteAcceptPath = useRouteMatch('/invites/:inviteId/accept');
+  const isInviteAcceptPath = useRouteMatch("/invites/:inviteId/accept");
 
   if (user) {
     return (
@@ -36,18 +28,16 @@ const App: React.FC = () => {
               render={() => {
                 if (false) {
                   return <Redirect to="/" />;
-                } else {
-                  // return <SubscriptionPage />;
                 }
+                // return <SubscriptionPage />;
               }}
             />
           </Switch>
         </main>
       </div>
     );
-  } else {
-    return <WelcomePage />;
   }
+  return <WelcomePage />;
 };
 
 export default withRouter(App);

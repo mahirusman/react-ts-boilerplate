@@ -5,7 +5,7 @@ import loaderstate from "./container/Loader/loader.slice";
 const app_reducer = combineReducers({ userstate, loaderstate });
 
 const rootReducer = (state: ReduceParams[0], action: ReduceParams[1]) => {
-  //clearning state
+  // clearning state
   if (action.type === logout.fulfilled.toString()) {
     localStorage.clear();
 

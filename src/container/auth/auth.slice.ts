@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createReducerBuilder } from "@/utils/actions";
+import { createReducerBuilder } from "src/utils/actions";
+import User from "src/models/user";
+import { UserstoreState } from "src/types";
 import { userloginAction } from "./auth.actions";
-import User from "@/models/user";
-import { UserstoreState } from "@/types";
 
 const initialState: UserstoreState = {
   user: new User(),

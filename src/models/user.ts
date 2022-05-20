@@ -1,4 +1,4 @@
-import { JWTTokens } from "@/types";
+import { JWTTokens } from "src/types";
 
 import BaseModel from "./base";
 import { defaultBoolean, defaultString } from "./defaults";
@@ -57,7 +57,7 @@ export default class User extends BaseModel {
   }
 
   get fullName(): string {
-    return this.firstName + " " + this.lastName;
+    return `${this.firstName} ${this.lastName}`;
   }
 
   get firstName(): string {

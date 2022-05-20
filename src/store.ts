@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import rootReducer from "./reducers";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import rootReducer from "./reducers";
 
 const middleware = getDefaultMiddleware({
   serializableCheck: false,

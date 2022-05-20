@@ -1,6 +1,6 @@
-import { JWTTokens, StorageStore } from "@/types";
+import { JWTTokens, StorageStore } from "src/types";
 
-const localStorage = window.localStorage;
+const { localStorage } = window;
 
 export const Keys: { [key: string]: keyof StorageStore } = {
   AUTH_TOKEN: "authTokens",
@@ -14,9 +14,8 @@ class StorageService {
     const res: string | null = localStorage.getItem(key);
     if (res) {
       return this.fromJSON(res);
-    } else {
-      console.warn("[Storage] Get", key, "not found");
     }
+    console.warn("[Storage] Get", key, "not found");
   }
 
   set(key: keyof StorageStore, value: any): void {
@@ -70,8 +69,7 @@ class StorageService {
     localStorage.clear();
   }
 
-  setAuthTokens = (authTokens: JWTTokens | null) =>
-    this.set(Keys.AUTH_TOKEN, authTokens);
+  setAuthTokens = (authTokens: JWTTokens | null) => this.set(Keys.AUTH_TOKEN, authTokens);
 
   getAuthTokens = (): JWTTokens | null => this.get(Keys.AUTH_TOKEN);
 }

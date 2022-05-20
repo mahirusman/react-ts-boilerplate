@@ -1,24 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import App from "./App";
 import { Provider } from "react-redux";
-import { store } from "./store";
 import { BrowserRouter } from "react-router-dom";
-import { ErrorBoundary } from "./General/ErrorBoundary/Index";
+import App from "./App";
+import { store } from "./store";
+
+import "src/assets/css/bootstrap.min.css";
+import "src/assets/css/style.scss";
 
 ReactDOM.render(
-  <ErrorBoundary>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </React.StrictMode>
-  </ErrorBoundary>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
 export { axios as ApiClient };
-// exporting axios to use it in base service
+// exporting axios to use it in

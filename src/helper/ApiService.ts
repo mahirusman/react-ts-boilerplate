@@ -1,5 +1,5 @@
-import { JWTTokens } from "@/types";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+import { JWTTokens } from "@/types";
 
 import { config } from "../config/constants";
 import { modelMapper } from "../models";
@@ -57,7 +57,7 @@ class ApiService {
         // eslint-disable-next-line no-console
         console.groupCollapsed(
           `%c API Request => ${method.toUpperCase()} ${configuration.url}`,
-          `color:white`
+          "color:white"
         );
         console.log("timestamp", new Date(Date.now()).toString());
         console.log("configuration", configuration);
@@ -72,10 +72,8 @@ class ApiService {
           const method = response?.config?.method || "";
           // eslint-disable-next-line no-console
           console.groupCollapsed(
-            `%c API Response => ${method.toUpperCase()} ${
-              response?.config.url
-            }`,
-            `color: green`
+            `%c API Response => ${method.toUpperCase()} ${response?.config.url}`,
+            "color: green"
           );
           console.log("timestamp", new Date(Date.now()).toString());
           console.log("duration", `${Date.now() - start}ms`);
@@ -87,16 +85,11 @@ class ApiService {
       },
       async (error: AxiosError) => {
         const method = error.response?.config?.method || "";
-        if (
-          !this.refreshing &&
-          (error.response?.status === 401 || error.response?.status === 403)
-        ) {
+        if (!this.refreshing && (error.response?.status === 401 || error.response?.status === 403)) {
           // Try to refresh the token and make the request again
           console.log(
-            `%c API Refreshing => ${method.toUpperCase()} ${
-              error.response?.config.url || ""
-            }`,
-            `color: green`
+            `%c API Refreshing => ${method.toUpperCase()} ${error.response?.config.url || ""}`,
+            "color: green"
           );
           try {
             this.refreshing = true;
@@ -130,10 +123,8 @@ class ApiService {
           }
         }
         console.groupCollapsed(
-          `%c API Error => ${method.toUpperCase()} ${
-            error.response?.config.url || ""
-          }`,
-          `color:green`
+          `%c API Error => ${method.toUpperCase()} ${error.response?.config.url || ""}`,
+          "color:green"
         );
         console.log("duration", `${Date.now() - start}ms`);
         console.log("error", { error });
@@ -162,12 +153,10 @@ class ApiService {
     });
 
   // @ts-ignore
-  post = ({ url, payload }: APIRequestArgs) =>
-    this.axios.post<any, any>(url, payload);
+  post = ({ url, payload }: APIRequestArgs) => this.axios.post<any, any>(url, payload);
 
   // @ts-ignore
-  delete = ({ url, payload }: APIRequestArgs) =>
-    this.axios.delete(url, payload);
+  delete = ({ url, payload }: APIRequestArgs) => this.axios.delete(url, payload);
 }
 
 export default new ApiService();

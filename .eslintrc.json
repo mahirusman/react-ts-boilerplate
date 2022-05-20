@@ -1,0 +1,69 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "plugins": ["react-hooks"],
+  "extends": ["react-app", "react-app/jest", "eslint:recommended", "airbnb-base", "prettier"],
+  "rules": {
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "camelcase": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/camelcase": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/quotes": [
+      "error",
+      "double",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+
+    "quotes": ["error", "double"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 1952,
+        "ignoreUrls": true
+      }
+    ],
+    // "camelcase": [
+    //   "error",
+    //   {
+    //     "properties": "always"
+    //   }
+    // ],
+    "react-hooks/exhaustive-deps": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.tsx"],
+      "rules": {
+        "no-nested-ternary": ["off"]
+      }
+    }
+  ]
+}

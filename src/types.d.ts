@@ -29,7 +29,7 @@ interface ApiPayloadType<PayloadDataType> {
   meta?: Record<string, unknown>;
 }
 
-//here is all api payloads
+// here is all api payloads
 
 type LoginPayload = {
   email: string;
